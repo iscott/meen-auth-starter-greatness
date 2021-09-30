@@ -12,7 +12,7 @@ userRouter.post('/', (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(12));
 
   User.create(req.body, (error, createdUser) => {
-    res.send(createdUser);
+    res.redirect("/");
   });
 
 });

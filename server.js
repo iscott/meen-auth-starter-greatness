@@ -3,8 +3,7 @@ require('dotenv').config();
 // Dependencies
 const express = require('express');
 const app = express();
-
-// Dependencies 
+const session = require('express-session');
 const mongoose = require('mongoose');
 
 // Database Configuration
@@ -22,6 +21,14 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 // Middleware
 // Body parser middleware: give us access to req.body
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+      secret: process.env.SECRET,
+      resave: false,
+      saveUninitialized: false
+  })
+);
 
 // Routes / Controllers
 const userController = require('./controllers/users');
